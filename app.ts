@@ -6,6 +6,7 @@ import express, { Express, NextFunction, Request, Response } from "express";
 import rootDir from "./utils/path";
 import { adminRouter } from "./routes/admin";
 import { shopRoutes } from "./routes/shop";
+import { get404 } from "./controllers/error";
 
 const app: Express = express();
 
@@ -17,13 +18,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/admin", adminRouter);
 app.use("/shop", shopRoutes);
-app.get("/", (req: Request, res: Response) => {
-  res.render("index", { pageTitle: "Home" });
-});
+app.get("/");
 
-app.get("*", (req: Request, res: Response, next: NextFunction) => {
-  res.render("404", { pageTitle: "404 Not Found" });
-});
+app.get("*", get404);
 
 const server = http.createServer(app);
 
