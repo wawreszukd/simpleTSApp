@@ -3,7 +3,6 @@ import path from "path";
 // @ts-ignore
 import express, { Express, NextFunction, Request, Response } from "express";
 
-import rootDir from "./utils/path";
 import { adminRouter } from "./routes/admin";
 import { shopRoutes } from "./routes/shop";
 import { get404 } from "./controllers/error";
