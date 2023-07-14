@@ -7,6 +7,7 @@ import rootDir from "./utils/path";
 import { adminRouter } from "./routes/admin";
 import { shopRoutes } from "./routes/shop";
 import { get404 } from "./controllers/error";
+import { getSlash } from "./controllers/home";
 
 const app: Express = express();
 
@@ -18,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/admin", adminRouter);
 app.use("/shop", shopRoutes);
-app.get("/");
+app.get("/", getSlash);
 
 app.get("*", get404);
 

@@ -32,6 +32,8 @@ const path_1 = __importDefault(require("path"));
 const express_1 = __importDefault(require("express"));
 const admin_1 = require("./routes/admin");
 const shop_1 = require("./routes/shop");
+const error_1 = require("./controllers/error");
+const home_1 = require("./controllers/home");
 const app = (0, express_1.default)();
 app.set("view engine", "ejs");
 app.set("views", path_1.default.join(__dirname, "..", "views"));
@@ -39,12 +41,8 @@ app.use("/static", express_1.default.static(path_1.default.join(__dirname, "..",
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use("/admin", admin_1.adminRouter);
 app.use("/shop", shop_1.shopRoutes);
-app.get("/", (req, res) => {
-    res.render("index", { pageTitle: "Home" });
-});
-app.get("*", (req, res, next) => {
-    res.render("404", { pageTitle: "404 Not Found" });
-});
+app.get("/", home_1.getSlash);
+app.get("*", error_1.get404);
 const server = http.createServer(app);
 server.listen(3000);
 console.log("Server running on port 3000");

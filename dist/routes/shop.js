@@ -5,12 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.shopRoutes = void 0;
 const express_1 = __importDefault(require("express"));
-const admin_1 = require("./admin");
+const shop_1 = require("../controllers/shop");
 exports.shopRoutes = express_1.default.Router();
-exports.shopRoutes.get("/", (req, res) => {
-    res.render("shop", { products: admin_1.products, pageTitle: "Shop list" });
-});
-exports.shopRoutes.post("/", (req, res) => {
-    res.send("Shop routes");
-});
+exports.shopRoutes.get("/", shop_1.getShop);
 //# sourceMappingURL=shop.js.map

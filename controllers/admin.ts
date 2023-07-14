@@ -1,10 +1,11 @@
 import express, { Request, Response } from "express";
-import { products } from "../routes/admin";
+import { Product } from "../models/product";
 
 export const getAddProduct = (req: Request, res: Response) => {
-  res.render("add-product", { prods: products, pageTitle: "Add Product" });
+  res.render("add-product", { pageTitle: "Add Product" });
 };
 export const postAddProduct = (req: Request, res: Response) => {
-  products.push({ title: req.body.title });
+  const product = new Product(req.body.title);
+  product.save();
   res.redirect("/");
 };
